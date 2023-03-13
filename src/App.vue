@@ -1,19 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="https://vuejs.org/images/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <dashboard></dashboard>
+      <h3>Badges List</h3>
+      <div class="section">
+        <button @click="setComponent('badges-list')">In Progress</button>
+        <button @click="setComponent('achived-badges')">Achived</button>
+      </div>
+      <component :is="selectedComponent"></component>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
+import BadgesList from './components/BadgesList.vue';
+import AchivedBadges from './components/AchivedBadges.vue';
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    BadgesList,
+    AchivedBadges
+  },
+  data(){
+    return{
+      selectedComponent: 'badges-list',
+    }
+  },
+  methods: {
+    setComponent(cmd){
+      this.selectedComponent = cmd;
+    }
   }
-}
+};
 </script>
 
 <style>
@@ -23,6 +38,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+.section {
+  background: #fff;
+  padding: 15px;
+}
+button {
+  margin: 5px 10px 0;
+  padding: 5px 15px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 </style>
